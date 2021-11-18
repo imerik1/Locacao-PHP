@@ -6,6 +6,8 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
   <title>TP de PHP</title>
 </head>
 <style>
@@ -33,6 +35,11 @@
     flex: 1;
   }
 
+  main {
+    display: flex;
+    flex-direction: column;
+  }
+
   main,
   footer {
     padding: 10px 0.75rem !important;
@@ -54,6 +61,7 @@
   .container-footer {
     display: flex;
     flex-flow: row wrap;
+    gap: 0.1rem;
   }
 </style>
 
