@@ -31,8 +31,12 @@ if (
   isset($_GET["id"])
 ) {
   $novoCliente = new Cliente($_GET["id"], $_POST['nome'], $_POST['cpf'], $_POST['telefone']);
+  Persiste::Update($novoCliente);
   $novoVeiculo = new Veiculo($_GET["id"], $_POST['marca'], $_POST['modelo'], $_POST['ano'], $_POST['placa'], $_POST['preco']);
+  Persiste::Update($novoVeiculo);
   $novoEndereco = new Endereco($_GET["id"], $_GET["id"], $_POST['logradouro'], $_POST['numero'], $_POST['bairro'], $_POST['cidade'], $_POST['estado'], $_POST['cep']);
+  Persiste::Update($novoEndereco);
   $p = Persiste::GetById('Models\Pagamento', $_GET['id']);
   $novoPagamento = new Pagamento($_GET["id"], $_GET["id"], $_GET["id"], $_POST['preco'], $p->getdata_pagamento);
+  Persiste::Update($novoPagamento);
 }
