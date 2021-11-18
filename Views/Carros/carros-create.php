@@ -2,6 +2,10 @@
 
 <style>
   form {
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
+    align-items: center;
     justify-self: center;
     align-self: center;
     width: 100%;
@@ -21,78 +25,84 @@
   .fields-divided>div {
     flex: 1;
   }
+
+  input[type=submit] {
+    margin: 0 auto;
+    max-width: fit-content;
+  }
 </style>
 <main>
   <h1>Formulário de aluguel de veículo</h1>
-  <form class="ui form">
+  <form class="ui form" action="carros-store.php" method="post">
     <h4 class="ui dividing header">Cliente</h4>
     <div class="required field">
       <label>Nome completo</label>
-      <input id="nome-completo" type="text" placeholder="Nome completo" required>
+      <input id="nome-completo" name="nome" type="text" placeholder="Nome completo" required>
     </div>
     <div class="required field">
       <label>CPF</label>
-      <input type="text" inputmode="numeric" id="CPF" placeholder="Seu CPF" required>
+      <input type="text" name="cpf" inputmode="numeric" id="CPF" placeholder="Seu CPF" required>
     </div>
     <div class="required field">
       <label>Telefone</label>
-      <input type="text" inputmode="numeric" id="telefone" placeholder="Seu telefone" required>
+      <input type="text" name="telefone" inputmode="numeric" id="telefone" placeholder="Seu telefone" required>
     </div>
     <h4 class="ui dividing header">Endereço</h4>
-    <div class="disabled required none endereco-fields field">
+    <div class="disabled required none address-fields field">
       <label>Logradouro</label>
-      <input type="text" id="logradouro" placeholder="Seu logradouro" disabled="" tabindex="-1" required>
+      <input type="text" id="logradouro" name="logradouro" placeholder="Seu logradouro" tabindex="-1" required>
     </div>
     <div class="fields-divided">
-      <div class="required none endereco-fields field">
+      <div class="required none address-fields field">
         <label>Número</label>
-        <input type="text" inputmode="numeric" id="número" placeholder="Seu número" required>
+        <input type="text" inputmode="numeric" name="numero" id="número" placeholder="Seu número" required>
       </div>
       <div class="required field">
         <label>CEP</label>
-        <input type="text" inputmode="numeric" id="CEP" placeholder="Seu CEP" required>
+        <input type="text" inputmode="numeric" name="cep" id="CEP" placeholder="Seu CEP" required>
       </div>
     </div>
     <p class="cep-error none">Por favor, digite um CEP válido.</p>
-    <div class="disabled required none endereco-fields field">
+    <div class="disabled required none address-fields field">
       <label>Bairro</label>
-      <input type="text" id="bairro" placeholder="Seu bairro" disabled="" tabindex="-1" required>
+      <input type="text" id="bairro" name="bairro" placeholder="Seu bairro" tabindex="-1" required>
     </div>
     <div class="fields-divided">
-      <div class="disabled required none endereco-fields field">
+      <div class="disabled required none address-fields field">
         <label>Cidade</label>
-        <input type="text" id="localidade" placeholder="Sua cidade" disabled="" tabindex="-1" required>
+        <input type="text" id="localidade" name="cidade" placeholder="Sua cidade" tabindex="-1" required>
       </div>
-      <div class="disabled required none endereco-fields field">
+      <div class="disabled required none address-fields field">
         <label>UF</label>
-        <input type="text" id="uf" placeholder="Seu estado" disabled="" tabindex="-1" required>
+        <input type="text" id="uf" name="estado" placeholder="Seu estado" tabindex="-1" required>
       </div>
     </div>
     <h4 class="ui dividing header">Veículo</h4>
     <div class="fields-divided">
       <div class="required field">
         <label>Marca</label>
-        <input type="text" id="marca" placeholder="Marca do veículo">
+        <input type="text" id="marca" name="marca" placeholder="Marca do veículo">
       </div>
       <div class="required field">
         <label>Modelo</label>
-        <input type="text" id="modelo" placeholder="Modelo do veículo">
+        <input type="text" id="modelo" name="modelo" placeholder="Modelo do veículo">
       </div>
       <div class="required field">
         <label>Ano</label>
-        <input type="number" step="1" min="1900" max="2022" value="2021" inputmode="numeric" id="ano" placeholder="Ano do veículo">
+        <input type="number" name="ano" step="1" min="1900" max="2022" value="2021" inputmode="numeric" id="ano" placeholder="Ano do veículo">
       </div>
     </div>
     <div class="fields-divided">
       <div class="required field">
         <label>Preço</label>
-        <input type="text" data-affixes-stay="true" data-prefix="R$ " data-thousands="." data-decimal="," inputmode="decimal" id="preco" placeholder="Preço do veículo">
+        <input type="text" name="preco" data-affixes-stay="true" data-prefix="R$ " data-thousands="." data-decimal="," inputmode="decimal" id="preco" placeholder="Preço do veículo">
       </div>
       <div class="required field">
         <label>Placa</label>
-        <input type="text" id="placa" placeholder="Placa do veículo">
+        <input type="text" id="placa" name="placa" placeholder="Placa do veículo">
       </div>
     </div>
+    <input type="submit" class="ui submit button" value="Enviar">
   </form>
 </main>
 
@@ -182,13 +192,13 @@
           const input = document.getElementById(field);
           input.value = result[field];
         })
-        document.querySelectorAll(".endereco-fields").forEach((element) => element.classList.remove("none"));
+        document.querySelectorAll(".address-fields").forEach((element) => element.classList.remove("none"));
         cepError.classList.add("none");
       } else {
         cepError.classList.remove("none");
       }
     } else {
-      document.querySelectorAll(".endereco-fields").forEach((element) => element.classList.add("none"));
+      document.querySelectorAll(".address-fields").forEach((element) => element.classList.add("none"));
       cepError.classList.add("none");
     }
   }
