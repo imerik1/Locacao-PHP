@@ -74,5 +74,6 @@
     <nav class="ui stackable menu">
       <a href="/Views/index.php" class="item">Página Inicial</a>
       <a href="/Views/Carros/carros-index.php" class="item">Tabela de veículos</a>
+      <a href="/Views/Files/files-index.php" class="item">Upload de arquivos</a>
     </nav>
   </header>
