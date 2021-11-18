@@ -8,7 +8,7 @@
 </style>
 
 <main>
-  <h1>Tabela de carros alugados</h1>
+  <h1>Tabela de veículos alugados</h1>
   <div style="width: 100%;" class="ui divider"></div>
   <a href="/Views/Carros/carros-create.php">
     <button class="ui right floated button">Novo veículo</button>
@@ -57,7 +57,7 @@
 
 <script src="https://semantic-ui.com/javascript/library/tablesort.js"></script>
 <script>
-  document.title = "Tabela de carros";
+  document.title = "Tabela de veículos alugados";
   $('table').tablesort();
 </script>
 
