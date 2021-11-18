@@ -13,8 +13,6 @@ use Models\Endereco;
 use Models\Pagamento;
 use Db\Persiste;
 
-$_POST = json_decode(file_get_contents('php://input'), true);
-
 if (
   isset($_POST['nome']) &&
   isset($_POST['cpf']) &&
