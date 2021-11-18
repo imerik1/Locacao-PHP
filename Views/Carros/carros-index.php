@@ -1,3 +1,9 @@
+<?php
+spl_autoload_register(function ($class_name) {
+  include '..\\..\\' . $class_name . '.php';
+});
+?>
+
 <?php include '..\header.php'; ?>
 
 <!-- Estilização única -->
@@ -11,7 +17,7 @@
   <h1>Tabela de veículos alugados</h1>
   <div style="width: 100%;" class="ui divider"></div>
   <a href="/Views/Carros/carros-create.php">
-    <button class="ui right floated button">Novo veículo</button>
+    <button class="ui right floated button">Novo aluguel</button>
   </a>
   <table class="ui sortable celled table">
     <thead>
@@ -26,30 +32,32 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <td data-label="Cliente">James</td>
-        <td data-label="Placa">FGC7J52</td>
-        <td data-label="Carro">Uno</td>
-        <td data-label="Ano">2007</td>
-        <td data-label="Valor">R$ 270,00</td>
-        <td data-label="Data de pagamento">14/07/2002</td>
-        <td data-label="" style="width: 1%; white-space: nowrap;">
-          <a title="Editar" href=""><img src="https://img.icons8.com/external-becris-lineal-becris/22/000000/external-edit-mintab-for-ios-becris-lineal-becris.png" /></a>
-          <a title="Excluir" href=""><img src="https://img.icons8.com/ios-glyphs/22/000000/delete-sign.png" /></a>
-        </td>
-      </tr>
-      <tr>
-        <td data-label="Cliente">Rodrigo</td>
-        <td data-label="Placa">FGC7J52</td>
-        <td data-label="Carro">Uno</td>
-        <td data-label="Ano">2007</td>
-        <td data-label="Valor">R$ 270,00</td>
-        <td data-label="Data de pagamento">14/07/2004</td>
-        <td data-label="" style="width: 1%; white-space: nowrap;">
-          <a title="Editar" href=""><img src="https://img.icons8.com/external-becris-lineal-becris/22/000000/external-edit-mintab-for-ios-becris-lineal-becris.png" /></a>
-          <a title="Excluir" href=""><img src="https://img.icons8.com/ios-glyphs/22/000000/delete-sign.png" /></a>
-        </td>
-      </tr>
+      <?php
+
+      use Db\Persiste;
+
+      $clientes = Persiste::GetAll('Models\Cliente');
+      $veiculos = Persiste::GetAll('Models\Veiculo');
+      $pagamentos = Persiste::GetAll('Models\Pagamento');
+
+      for ($i = 0; $i < count($clientes); ++$i) {
+        $v = $veiculos[$i];
+        $c = $clientes[$i];
+        $p = $pagamentos[$i];
+        echo "<tr>
+                <td data-label='Cliente'>$c->getnome</td>
+                <td data-label='Placa'>$v->getplaca</td>
+                <td data-label='Carro'>$v->getmarca $v->getmodelo</td>
+                <td data-label='Ano'>$v->getano</td>
+                <td data-label='Valor'>$v->getpreco</td>
+                <td data-label='Data de pagamento'>$p->getdata_pagamento</td>
+                <td data-label='' style='width: 1%; white-space: nowrap;'>
+                  <a title='Editar' href='carros-edit.php?id=$p->getid'><img src='https://img.icons8.com/external-becris-lineal-becris/22/000000/external-edit-mintab-for-ios-becris-lineal-becris.png' /></a>
+                  <a title='Excluir' href='carros-delete.php?id=$p->getid'><img src='https://img.icons8.com/ios-glyphs/22/000000/delete-sign.png' /></a>
+                </td>
+              </tr>";
+      }
+      ?>
     </tbody>
   </table>
 </main>
