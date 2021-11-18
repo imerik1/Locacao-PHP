@@ -1,0 +1,5 @@
+id;id_cliente;logradouro;numero;bairro;cidade;estado;cep
+1;1;Avenida 1;2009;Completo;Praia Grande;SP;11701423
+2;2;Avenida 2;2010;Simples;Salvador;BA;11701424
+3;3;Avenida 3;2021;Sei lá;Curitiba;PR;11701425
+4;4;Avenida 4;2022;Qualquer coisa;Tijucas;SC;11701422
