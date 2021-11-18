@@ -39,7 +39,6 @@ spl_autoload_register(function ($class_name) {
       $clientes = Persiste::GetAll('Models\Cliente');
       $veiculos = Persiste::GetAll('Models\Veiculo');
       $pagamentos = Persiste::GetAll('Models\Pagamento');
-
       for ($i = 0; $i < count($clientes); ++$i) {
         $v = $veiculos[$i];
         $c = $clientes[$i];
