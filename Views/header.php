@@ -63,12 +63,16 @@
     flex-flow: row wrap;
     gap: 0.1rem;
   }
+
+  .none {
+    display: none;
+  }
 </style>
 
 <body>
   <header>
     <nav class="ui stackable menu">
       <a href="/Views/index.php" class="item">Página Inicial</a>
-      <a href="/Views/Carros/carros-index.php" class="item">Carros</a>
+      <a href="/Views/Carros/carros-index.php" class="item">Tabela de veículos</a>
     </nav>
   </header>
