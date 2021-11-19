@@ -189,4 +189,45 @@ class Persiste
 
     return $retorno;
   }
+
+  public static function GetPaginate($nomeclasse, $inicio, $limit)
+  {
+    try {
+      $pdo = new PDO(DB, DB_USER, DB_PASS);
+      $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+      $pdo->setAttribute(PDO::ATTR_EMULATE_PREPARES, FALSE);
+
+      $rf = new ReflectionClass($nomeclasse);
+      $aux = explode("\\", $nomeclasse);
+      $tabela = array_pop($aux);
+      $tabela = strtolower($tabela . 's');
+      $colunas = "";
+      foreach ($rf->getProperties() as $p) {
+        $colunas = $colunas . $p->name . ',';
+      }
+      $colunas = substr($colunas, 0, -1);
+
+      $stmt = $pdo->prepare("select $colunas from $tabela order by id limit $inicio, $limit");
+      $stmt->execute();
+
+      $stmt->setFetchMode(PDO::FETCH_ASSOC);
+
+      $retorno = [];
+      $linha = $stmt->fetch();
+      while ($linha != null) {
+        $obj = $rf->newInstanceWithoutConstructor();
+        foreach ($linha as $i => $v) {
+          $obj->{'set' . $i} = $v;
+        }
+        array_push($retorno, $obj);
+        $linha = $stmt->fetch();
+      }
+    } catch (PDOException $pex) {
+      $retorno = $pex;
+    } finally {
+      $pdo = null;
+    }
+
+    return $retorno;
+  }
 }
