@@ -78,7 +78,8 @@ footer {
   padding: 0 !important;
 }
 
-input[type="submit"] {
+.link-submit {
+  width: fit-content;
   margin: 0 auto;
   max-width: fit-content;
 }

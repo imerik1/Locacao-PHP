@@ -1,4 +1,5 @@
 import { FC, useState } from "react";
+import { Link } from "react-router-dom";
 import { Form, Header } from "semantic-ui-react";
 import { IViaCep } from "../utils/Endereco";
 
@@ -267,12 +268,14 @@ const NewVehicles: FC = () => {
         <FormCliente />
         <FormEndereco />
         <FormVehicle />
-        <input
-          onClick={submitForm}
-          type="submit"
-          className="ui submit button"
-          value="Enviar"
-        />
+        <Link className="link-submit" to="/table-vehicles">
+          <input
+            onClick={submitForm}
+            type="submit"
+            className="ui submit button"
+            value="Enviar"
+          />
+        </Link>
       </Form>
     </main>
   );
