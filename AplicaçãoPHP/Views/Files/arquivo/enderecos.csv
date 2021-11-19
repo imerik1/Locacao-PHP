@@ -1,0 +1,17 @@
+id;id_cliente;logradouro;numero;bairro;cidade;estado;cep
+1;1;Avenida 1;2009;Completo;Praia Grande;SP;11701423
+2;2;Avenida 2;2010;Simples;Salvador;BA;11701424
+3;3;Avenida 3;2021;Sei lá;Curitiba;PR;11701425
+4;4;Avenida 4;2022;Qualquer coisa;Tijucas;SC;11701422
+5;5;Avenida 5;2009;Completo;Praia Grande;SP;11701423
+6;6;Avenida 6;2010;Simples;Salvador;BA;11701424
+7;7;Avenida 7;2021;Sei lá;Curitiba;PR;11701425
+8;8;Avenida 8;2022;Qualquer coisa;Tijucas;SC;11701422
+9;9;Avenida 9;2009;Completo;Praia Grande;SP;11701423
+10;10;Avenida 10;2010;Simples;Salvador;BA;11701424
+11;11;Avenida 11;2021;Sei lá;Curitiba;PR;11701425
+12;12;Avenida 12;2022;Qualquer coisa;Tijucas;SC;11701422
+13;13;Avenida 13;2009;Completo;Praia Grande;SP;11701423
+14;14;Avenida 14;2010;Simples;Salvador;BA;11701424
+15;15;Avenida 15;2021;Sei lá;Curitiba;PR;11701425
+16;16;Avenida 16;2022;Qualquer coisa;Tijucas;SC;11701422
