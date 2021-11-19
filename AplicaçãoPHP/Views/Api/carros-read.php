@@ -7,12 +7,29 @@ use Db\Persiste;
 
 $result = [];
 
-if (isset($_GET['id']) && isset($_GET['page']) && isset($_GET['limit'])) {
-  $clientes = Persiste::GetPaginate('Models\Cliente', isset($_GET['page']), isset($_GET['limit']));
-  $veiculos = Persiste::GetPaginate('Models\Veiculo', isset($_GET['page']), isset($_GET['limit']));
-  $pagamentos = Persiste::GetPaginate('Models\Pagamento', isset($_GET['page']), isset($_GET['limit']));
-  $enderecos = Persiste::GetPaginate('Models\Endereco', isset($_GET['page']), isset($_GET['limit']));
-  if (is_array($clientes) && is_array($veiculos) && is_array($pagamentos) && is_array($enderecos)) {
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST, PATCH, PUT, DELETE, OPTIONS');
+
+if (isset($_GET['page']) && isset($_GET['limit'])) {
+  if (isset($_GET['page'])) {
+    $page = $_GET['page'];
+  } else {
+    $page = 1;
+  }
+
+  if (isset($_GET['limit'])) {
+    $limit = $_GET['limit'];
+  } else {
+    $limit = 10;
+  }
+  $inicio = $page - 1;
+  $inicio = $inicio * $limit;
+  $clientes = Persiste::GetPaginate('Models\Cliente', $inicio, $limit);
+  $veiculos = Persiste::GetPaginate('Models\Veiculo', $inicio, $limit);
+  $pagamentos = Persiste::GetPaginate('Models\Pagamento', $inicio, $limit);
+  $enderecos = Persiste::GetPaginate('Models\Endereco', $inicio, $limit);
+  $array = Persiste::GetAll('Models\Cliente');
+  if (is_array($clientes) && is_array($veiculos) && is_array($pagamentos) && is_array($enderecos) && is_array($array)) {
     for ($i = 0; $i < count($clientes); ++$i) {
       $v = $veiculos[$i];
       $c = $clientes[$i];
@@ -38,6 +55,7 @@ if (isset($_GET['id']) && isset($_GET['page']) && isset($_GET['limit'])) {
       ];
       $result[$i] = $vet;
     }
+    $result[count($result)] = ['total_pages' => round((count($array) / $limit))];
     http_response_code(200);
     echo json_encode($result);
   } else {
