@@ -13,7 +13,7 @@ spl_autoload_register(function ($class_name) {
   }
 </style>
 
-<main>
+<main style="max-width: 98vw;">
   <h1>Tabela de veículos alugados</h1>
   <div style="width: 100%;" class="ui divider"></div>
   <a href="/Views/Carros/carros-create.php">
@@ -50,8 +50,8 @@ spl_autoload_register(function ($class_name) {
               echo "selected";
             } ?> value="?page=<?= $page ?>&limit=20">20</option>
   </select>
-  <table class="ui sortable celled table">
-    <thead>
+  <table class="ui sortable celled table" style="max-width: 100%;">
+    <thead style="max-width: 100%;">
       <tr>
         <th class="sorted ascending">Cliente</th>
         <th>Placa</th>
@@ -62,7 +62,7 @@ spl_autoload_register(function ($class_name) {
         <th class="no-sort" style="width: auto;"></th>
       </tr>
     </thead>
-    <tbody>
+    <tbody style="max-width: 100%;">
       <?php
 
       use Db\Persiste;
@@ -98,20 +98,35 @@ spl_autoload_register(function ($class_name) {
   $proximo = $page + 1;
   $array = Persiste::GetAll('Models\Cliente');
   if (is_array($array)) {
-    echo "<div style='margin: 0 auto;'>";
-    if ($page > 1) {
-      echo "<div class='ui animated fade button' tabindex='0'>
-              <a style='color: #00000099;' class='visible content' href='?page=$anterior&limit=$limit'>Anterior</a>
-              <a style='color: #00000099;' class='hidden content' href='?page=$anterior&limit=$limit'><i class='left arrow icon'></i></a>
-            </div>";
+    $limitmax = round((count($array) / $limit));
+    if ($limitmax > 1) {
+      echo "<div style='margin: 0 auto;'>";
+      echo "<div class='ui pagination menu'>";
+      if ($page + 1 > $limitmax) {
+        $next  = $page;
+      } else {
+        $next = $page + 1;
+      }
+      if ($page - 1 == 0) {
+        $prev  = 1;
+      } else {
+        $prev = $page - 1;
+      }
+      echo "<a aria-current='false' href='?page=$prev&limit=$limit' aria-disabled='false' tabindex='0' class='item'>«</a>";
+      for ($i = $page, $j = 0; $i <= $limitmax; ++$i, ++$j) {
+        if ($j == 3) {
+          break;
+        }
+        if ($i == $page) {
+          echo "<a aria-current='true' aria-disabled='false' tabindex='0' value='$i' type='pageItem' href='?page=$i&limit=$limit' class='item active'>$i</a>";
+        } else {
+          echo "<a aria-current='false' aria-disabled='false' tabindex='0' value='$i' type='pageItem' href='?page=$i&limit=$limit' class='item'>$i</a>";
+        }
+      }
+      echo "<a aria-current='false' href='?page=$next&limit=$limit' aria-disabled='false' tabindex='0' class='item'>»</a>";
+      echo "</div>";
+      echo "</div>";
     }
-    if ($page < (count($array) / $limit)) {
-      echo "<div class='ui animated fade button' tabindex='0'>
-              <a style='color: #00000099;' class='visible content' href='?page=$proximo&limit=$limit'>Próxima</a>
-              <a style='color: #00000099;' class='hidden content' href='?page=$proximo&limit=$limit'><i class='right arrow icon'></i></a>
-            </div>";
-    }
-    echo "</div>";
   }
   ?>
 </main>
