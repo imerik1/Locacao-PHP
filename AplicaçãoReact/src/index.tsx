@@ -1,16 +1,29 @@
+/* eslint-disable no-restricted-globals */
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
 import reportWebVitals from "./reportWebVitals";
+import "semantic-ui-css/semantic.min.css";
+import Header from "./components/Header";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import "./styles/Global.css";
+import Footer from "./components/Footer";
+import Home from "./pages/Home";
+import Vehicles from "./pages/Vehicles";
+import NewVehicles from "./pages/NewVehicles";
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Router>
+      <Header />
+      <Switch>
+        <Route path="/new-vehicle" component={NewVehicles} />
+        <Route path="/table-vehicles" component={Vehicles} />
+        <Route path="/" component={Home} />
+      </Switch>
+      <Footer />
+    </Router>
   </React.StrictMode>,
   document.getElementById("root")
 );
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
 reportWebVitals();
