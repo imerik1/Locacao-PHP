@@ -9,7 +9,7 @@ use Models\Endereco;
 use Models\Pagamento;
 use Db\Persiste;
 
-$_POST = file_get_contents('php://input');
+$_POST = json_decode(file_get_contents('php://input'), true);
 
 if (
   isset($_POST['nome']) &&
